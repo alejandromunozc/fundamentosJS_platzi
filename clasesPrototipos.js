@@ -1,17 +1,19 @@
-function Persona(nombre, apellido, edad, altura) {
-    this.nombre = nombre;
-    this.apellido = apellido;
-    this.edad = edad;
-    this.altura = altura;
-}
+class Persona {
+    constructor(nombre, apellido, edad, altura) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.altura = altura;
+    }
 
-Persona.prototype.presentacion = function() {
-    console.log(`Hola, mi nombre es ${this.nombre} ${this.apellido}, tengo ${this.edad} años y mido ${this.altura} metros`);
-}
+    presentacion = function() {
+        console.log(`Hola, mi nombre es ${this.nombre} ${this.apellido}, tengo ${this.edad} años y mido ${this.altura} metros`);
+    }
 
-Persona.prototype.cumpleannios = function() {
-    this.edad++;
-    console.log(`He cumplido años, ahora tengo ${this.edad} años.`);
+    cumpleannios = function() {
+        this.edad++;
+        console.log(`He cumplido años, ahora tengo ${this.edad} años.`);
+    }
 }
 
 var cristian = new Persona('Cristian', 'Muñoz', 34, 1.35);
