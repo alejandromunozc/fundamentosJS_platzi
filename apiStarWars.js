@@ -9,7 +9,19 @@ const peopleUrl = `${API_URL}${PEOPLE_URL.replace(':id', 1)}`; // .replace('stri
 const opts = { crossDomain: true };
 const onPeopleResponse = function(people) { //Esta funcion se ejecurta si el request es exitoso.
     //console.log(arguments); // Nos muestra los argumentos que trae la funcion.
-    console.log(`Hola yo soy, ${people.name}`);
+    console.log(`Hola, yo soy ${people.name}`);
 }
 
 $.get(peopleUrl, opts, onPeopleResponse);
+
+
+function obtenerPersonaje(id) {
+    const url = `${API_URL}${PEOPLE_URL.replace(':id', id)}`;
+    $.get(url, opts, onPeopleResponse);
+}
+
+// Las respuestas no llegarán en el mismo orden que se listan debido al asincronismo de JavaScript
+obtenerPersonaje(2);
+obtenerPersonaje(3);
+obtenerPersonaje(4);
+obtenerPersonaje(5);
