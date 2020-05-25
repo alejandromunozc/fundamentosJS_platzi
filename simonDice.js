@@ -7,13 +7,14 @@ const ULTIMO_NIVEL = 10;
 
 class Juego {
     constructor() {
+        this.inicializar = this.inicializar.bind(this);
         this.inicializar();
         this.generarSecuencia();
         setTimeout(this.siguienteNivel, 500);
     }
 
     inicializar() {
-        btnEmpezar.classList.add('hide');
+        this.toggleBtnEmpezar();
         this.elegirColor = this.elegirColor.bind(this);
         this.siguienteNivel = this.siguienteNivel.bind(this);
         this.nivel = 1;
@@ -22,6 +23,14 @@ class Juego {
             violeta,
             naranja,
             verde
+        }
+    }
+
+    toggleBtnEmpezar() {
+        if (btnEmpezar.classList.contains('hide')) {
+            btnEmpezar.classList.remove('hide');
+        } else {
+            btnEmpezar.classList.add('hide');
         }
     }
 
@@ -101,15 +110,28 @@ class Juego {
                 this.nivel++;
                 this.eliminarEventosClick();
                 if (this.nivel === (ULTIMO_NIVEL + 1)) {
-                    //Ganó
+                    this.ganoJuego();
                 } else {
                     setTimeout(this.siguienteNivel, 1500);
                 }
 
             }
         } else {
-            //Perdió
+            this.perdioJuego();
         }
+    }
+
+    ganoJuego() {
+        swal('Platzi', 'Felicitaciones, ganaste el juego', 'success')
+            .then(this.inicializar)
+    }
+
+    perdioJuego() {
+        swal('Platzi', 'Lamentablemente perdiste el juego', 'error')
+            .then(() => {
+                this.eliminarEventosClick();
+                this.inicializar();
+            })
     }
 }
 
